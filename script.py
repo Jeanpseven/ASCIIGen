@@ -1,6 +1,8 @@
 from PIL import Image
 from termcolor import colored
 import os
+from tkinter import Tk
+from tkinter.filedialog import askopenfilename
 
 
 def converter_imagem_para_ascii(caminho_imagem, largura_ascii, manter_cores):
@@ -58,10 +60,13 @@ def interagir_com_usuario():
         escolha = input("Digite a opção desejada: ")
         
         if escolha == '1':
-            caminho_imagem = input("Digite o caminho da imagem: ")
+            # Cria uma janela para selecionar a imagem
+            root = Tk()
+            root.withdraw()
+            caminho_imagem = askopenfilename(title="Selecione a imagem")
             while not os.path.isfile(caminho_imagem):
                 print("Caminho da imagem inválido. Tente novamente.")
-                caminho_imagem = input("Digite o caminho da imagem: ")
+                caminho_imagem = askopenfilename(title="Selecione a imagem")
             
             largura_terminal, altura_terminal = obter_tamanho_terminal()
             largura_ascii = min(largura_terminal, 100)
